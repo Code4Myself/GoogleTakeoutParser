@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>GoogleTakeoutParser</groupId>
+	<groupId>jp.utokyo.shibalab.googletakeoutparser</groupId>
 	<artifactId>GoogleTakeoutParser</artifactId>
 	<version>0.0.1</version>
 
@@ -14,11 +14,12 @@
 		<commons.lang.version>3.5</commons.lang.version>
 		<apache.logging.version>2.3</apache.logging.version>
 		<jackson.version>2.8.6</jackson.version>
+		<ical4j.version>2.0.0</ical4j.version>
 	</properties>
+
 
 	<!-- dependencies ////////////////////////////////////// -->
 	<dependencies>
-
 		<!-- apache commons lang =========================== -->
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
@@ -52,6 +53,15 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- ical4j ======================================== -->
+		<!-- https://mvnrepository.com/artifact/org.mnode.ical4j/ical4j -->
+		<!-- https://github.com/ical4j/ical4j -->
+		<dependency>
+			<groupId>org.mnode.ical4j</groupId>
+			<artifactId>ical4j</artifactId>
+			<version>${ical4j.version}</version>
 		</dependency>
 
 	</dependencies>
