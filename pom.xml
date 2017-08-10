@@ -15,6 +15,8 @@
 		<apache.logging.version>2.3</apache.logging.version>
 		<jackson.version>2.8.6</jackson.version>
 		<ical4j.version>2.0.0</ical4j.version>
+		<dom4j.version>2.0.1</dom4j.version>
+		<jdom.version>2.0.6</jdom.version>
 	</properties>
 
 
@@ -63,6 +65,22 @@
 			<artifactId>ical4j</artifactId>
 			<version>${ical4j.version}</version>
 		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.dom4j/dom4j -->
+		<dependency>
+		    <groupId>org.dom4j</groupId>
+		    <artifactId>dom4j</artifactId>
+		    <version>${dom4j.version}</version>
+		</dependency>
+				
+	
+		<!-- https://mvnrepository.com/artifact/org.jdom/jdom2
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom2</artifactId>
+			<version>${jdom.version}</version>
+		</dependency>
+		--> 
 
 	</dependencies>
 
