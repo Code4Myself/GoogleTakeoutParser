@@ -51,6 +51,11 @@ public class Event {
 		@JsonProperty("query")
 		private Query _query;
 
+		/* instance methods -------------------------------- */
+		/**
+		 * get query text
+		 * @return query text
+		 */
 		public Query getQuery() {
 			return _query;
 		}
