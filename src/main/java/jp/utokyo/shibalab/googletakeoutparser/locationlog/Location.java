@@ -19,19 +19,27 @@ public class Location implements Comparable<Location> {
 	 * ============================================================== */
 	/** time-stamp */
 	@JsonProperty("timestampMs")
-	private long _timestampMs;
+	private Long _timestampMs;
 	
 	/** longitude */
 	@JsonProperty("longitudeE7")
-	private int _lonE7;
+	private Integer _lonE7;
 	
 	/** latitude */
 	@JsonProperty("latitudeE7")
-	private int _latE7;
+	private Integer _latE7;
 	
 	/** location accuracy */
 	@JsonProperty("accuracy")
-	private int _accuracy;
+	private Integer _accuracy;
+	
+	/** velocity */
+	@JsonProperty("velocity")
+	private Integer _velocity;
+	
+	/** altitude */
+	@JsonProperty("altitude")
+	private Integer _altitude;
 	
 	/** activity array */
 	@JsonProperty("activitys")
@@ -46,7 +54,7 @@ public class Location implements Comparable<Location> {
 	 * @return time-stamp
 	 */
 	public Date getTime() { 
-		return new Date(_timestampMs);
+		return _timestampMs != null ? new Date(_timestampMs) : null;
 	}
 	
 	/**
@@ -54,7 +62,7 @@ public class Location implements Comparable<Location> {
 	 * @return longitude
 	 */
 	public double getLon() { 
-		return _lonE7 / 1.0e7;
+		return _lonE7 != null ? _lonE7 / 1.0e7 : Double.NaN;
 	}
 	
 	/**
@@ -62,7 +70,7 @@ public class Location implements Comparable<Location> {
 	 * @return latitude
 	 */
 	public double getLat() { 
-		return _latE7 / 1.0e7;
+		return _latE7 != null ?  _latE7 / 1.0e7 : Double.NaN;
 	}
 	
 	/**
@@ -70,7 +78,23 @@ public class Location implements Comparable<Location> {
 	 * @return accuracy
 	 */
 	public int getAccuracy() { 
-		return _accuracy;
+		return _accuracy != null ? _accuracy.intValue() : 0;
+	}
+	
+	/**
+	 * get velocity 
+	 * @return velocity
+	 */
+	public int getVelocity() {
+		return _velocity != null ? _velocity.intValue() : 0;
+	}
+	
+	/**
+	 * get altitude
+	 * @return altitude
+	 */
+	public int getAltitude() {
+		return _altitude != null ? _altitude.intValue() : 0;
 	}
 	
 	/**
@@ -111,7 +135,9 @@ public class Location implements Comparable<Location> {
 		String[] tokens = new String[]{ sdf.format(getTime()),
 										String.format("%.08f",getLon()),
 										String.format("%.08f",getLat()),
-										String.valueOf(getAccuracy())    };
+										String.valueOf(_accuracy),
+										String.valueOf(_velocity),
+										String.valueOf(_altitude)};
 		// compose CSV line 
 		String core = StringUtils.join(tokens,",");
 		
@@ -141,11 +167,13 @@ public class Location implements Comparable<Location> {
 	/* @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return String.format("(%d,%d,%d,%d,%s)",
+		return String.format("(%d,%d,%d,%d,%d,%d,%s)",
 							 _timestampMs,
 							 _lonE7,
 							 _latE7,
 							 _accuracy,
+							 _velocity,
+							 _altitude,
 							 _activitys);
 	}	
 }
