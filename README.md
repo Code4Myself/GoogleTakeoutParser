@@ -25,11 +25,12 @@ Java Parser Library for Google Takeout data
       "longitudeE7": 1396785506,
       "accuracy": 8,
       "velocity": 0,
+      "heading": 145,
       "altitude": 98,
-      "activitys": [
+      "activity": [
         {
           "timestampMs": "1486105892533",
-          "activities": [
+          "activity": [
             {
               "type": "still",
               "confidence": 75
@@ -71,10 +72,11 @@ Java Parser Library for Google Takeout data
 - *longitudeE7* : (integer) longitude value in integer. longitudeE7 / 10,000,000 = longitude in degree
 - *accuracy* : (integer) accuracy value defined in Android SDK?  [Android SDK](https://developer.android.com/reference/android/location/Location.html#getAccuracy())
 - *velocity* : (integer) velocity value (m/s or km/h?). sometimes missing
+- *heading* : (integer) heading direction ? (0 - 360 deg?)
 - *altitude* : (integer) altitude value (m?). sometimes missing
-- *activitys* : (array/object) estimated activity or transportation mode.
+- *activity* : (array/object) estimated activity or transportation mode. (JSON key was updated from activitys to activity)
   - *timestampMs* : (string) timestamp in msec. 
-  - *activities* : (array/object) activity contents
+  - *activity* : (array/object) activity contents (JSON key was updated from activities to activity)
     - *type* : (string) activity type. (e.g. still, onFoot, walking, running, inVehicle, onBicycle, unknown, ...) 
     - *confidence* : (integer) confidence value of estimation ?   
 
