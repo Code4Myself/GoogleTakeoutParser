@@ -13,11 +13,33 @@ public class Activity {
 	 * ============================================================== */
 	/** mode(?) */
 	@JsonProperty("type")
-	private String _type;
+	private String  _type;
 	
 	/** confidence value(%?) */
 	@JsonProperty("confidence")
-	private int    _confidence;
+	private Integer _confidence;
+
+	
+	/* ==============================================================
+	 * constructors
+	 * ============================================================== */
+	/**
+	 * initialization
+	 */
+	protected Activity() {
+		_type       = null;
+		_confidence = null;
+	}
+	
+	/**
+	 * initialization 
+	 * @param type activity type
+	 * @param confidence confidence score
+	 */
+	protected Activity(String type, Integer confidence) { 
+		_type       = type;
+		_confidence = confidence;
+	}
 	
 
 	/* ==============================================================
@@ -34,7 +56,7 @@ public class Activity {
 	 * get confidence value
 	 * @return confidence value(%?)
 	 */
-	public int getConfidence() { 
+	public Integer getConfidence() { 
 		return _confidence;
 	}		
 	

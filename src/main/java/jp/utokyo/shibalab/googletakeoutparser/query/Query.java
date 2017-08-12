@@ -17,13 +17,35 @@ public class Query {
 	@JsonProperty("query_text")
 	private String _queryText;
 		
-	/* ==============================================================
-	 * instance fields
-	 * ============================================================== */	
 	/** activity array */
 	@JsonProperty("id")
-	private List<TimeStamp> _timeStamp;
+	private List<ID> _ids;
+
 	
+	/* ==============================================================
+	 * constructors
+	 * ============================================================== */
+	/**
+	 * initialization
+	 */
+	protected Query() {
+		this(null,null);
+	}
+	
+	/**
+	 * initialization 
+	 * @param ids ID object list
+	 * @param queryText query text
+	 */
+	protected Query(List<ID> ids, String queryText) { 
+		_ids       = ids;
+		_queryText = queryText;
+	}
+	
+	
+	/* ==============================================================
+	 * instance methods
+	 * ============================================================== */
 	/**
 	 * get query text
 	 * @return query text
@@ -33,16 +55,40 @@ public class Query {
 	}
 	
 	/**
-	 * get time stamps 
-	 * @return time stamp list
+	 * get ID (including time stamp) 
+	 * @return ID list(time stamp)
 	 */
-	public List<TimeStamp> listTimeStamp() {
-		return _timeStamp;
+	public List<ID> listIDs() {
+		return _ids;
+	}
+	
+	/**
+	 * make CSV string as the following column order(id,querytext)
+	 * @return CSV string
+	 */
+	public String toCsvString() {
+		return toCsvString(",");
+	}
+	
+	/**
+	 * make CSV string as the following column order(id,querytext)
+	 * @param delim column delimiter
+	 * @return CSV string
+	 */
+	public String toCsvString(String delim) {
+		StringBuffer buf = new StringBuffer();
+		// construct token with IDs
+		for(ID id:_ids) { 
+			buf.append("|").append(id.toString());
+		}
+		
+		// returns result /////////////////////////////////
+		return buf.substring(1) + delim + _queryText;
 	}
 	
 	/* @see java.lang.Object#toString() */
 	@Override
 	public String toString() { 
-		return _queryText;
+		return String.format("id=%s,query_text=%s",_ids,_queryText);
 	}
 }

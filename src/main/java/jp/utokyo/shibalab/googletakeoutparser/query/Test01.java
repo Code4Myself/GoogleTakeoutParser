@@ -1,10 +1,9 @@
-package jp.utokyo.shibalab.googletakeoutparser.locationlog;
+package jp.utokyo.shibalab.googletakeoutparser.query;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -12,9 +11,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * convert JSON data of Google Location Logs into CSV data
+ * convert JSON data of Google query logs into CSV (batch)
  */
-public class LocationLogParser {
+public class Test01 {
 	/* ==============================================================
 	 * static methods
 	 * ============================================================== */
@@ -25,19 +24,19 @@ public class LocationLogParser {
 	public static void main(String[] args) {
 		File inputFile  = new File(args[0]);
 		File outputFile = new File(args[1]);
-		
+
+		long t0 = System.currentTimeMillis();
 		try (BufferedWriter bw=new BufferedWriter(new FileWriter(outputFile))) {
 			// parse JSON data ////////////////////////////
 			ObjectMapper   jsonMapper = new ObjectMapper();
-			Locations      locs       = jsonMapper.readValue(inputFile,Locations.class);
-			List<Location> list       = locs.listLocations();
-			Collections.sort(list);
+			Events          event      = jsonMapper.readValue(inputFile,Events.class);
+			List<Query>    list       = event.listQueries();
 			
 			// export results /////////////////////////////
-			bw.write("timestamp,lon,lat,acc,activities");
+			bw.write("id,querytext");
 			bw.newLine();
-			for(Location loc:locs.listLocations()) { 
-				bw.write(loc.toCsvString());
+			for(Query q:list) {
+				bw.write(q.toCsvString());
 				bw.newLine();
 			}
 		}
@@ -47,6 +46,8 @@ public class LocationLogParser {
 		catch(IOException exp) { 
 			exp.printStackTrace();
 		}
+		long t1 = System.currentTimeMillis();
+		System.out.printf("time duration: %.03f (sec) ", (t1-t0)/1000d);
 	}
 	
 }
