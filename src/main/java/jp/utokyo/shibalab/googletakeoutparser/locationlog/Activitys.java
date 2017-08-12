@@ -19,11 +19,34 @@ public class Activitys {
 	 * ============================================================== */
 	/** time-stamp property */
 	@JsonProperty("timestampMs")
-	private long _timestampMs;
+	private Long _timestampMs;
 	
 	/** for activity array */
-	@JsonProperty("activities")
+//	@JsonProperty("activities")
+	@JsonProperty("activity")
 	private List<Activity> _activities;
+
+	
+	/* ==============================================================
+	 * constructors
+	 * ============================================================== */
+	/**
+	 * initialization
+	 */
+	protected Activitys() {
+		_timestampMs = null;
+		_activities  = null;
+	}
+	
+	/**
+	 * initialization 
+	 * @param timestampMs time-stamp in msec
+	 * @param activities activity list
+	 */
+	protected Activitys(Long timestampMs, List<Activity> activities) {
+		_timestampMs = timestampMs;
+		_activities  = activities;
+	}
 	
 
 	/* ==============================================================
@@ -34,7 +57,7 @@ public class Activitys {
 	 * @return time-stamp
 	 */
 	protected Date getTimestamp() {
-		return new Date(_timestampMs);
+		return _timestampMs != null ?  new Date(_timestampMs) : null;
 	}
 	
 	/**

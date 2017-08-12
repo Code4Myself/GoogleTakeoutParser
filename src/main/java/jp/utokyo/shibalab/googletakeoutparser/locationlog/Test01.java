@@ -1,10 +1,10 @@
-package jp.utokyo.shibalab.googletakeoutparser.query;
+package jp.utokyo.shibalab.googletakeoutparser.locationlog;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -12,9 +12,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * convert JSON data of Google Location Logs into CSV data
+ * convert JSON data of Google Location Logs into CSV data(batch process) 
  */
-public class QueryLogParser {
+public class Test01 {
 	/* ==============================================================
 	 * static methods
 	 * ============================================================== */
@@ -26,23 +26,20 @@ public class QueryLogParser {
 		File inputFile  = new File(args[0]);
 		File outputFile = new File(args[1]);
 		
+		long t0 = System.currentTimeMillis();
 		try (BufferedWriter bw=new BufferedWriter(new FileWriter(outputFile))) {
 			// parse JSON data ////////////////////////////
 			ObjectMapper   jsonMapper = new ObjectMapper();
-			Event          event      = jsonMapper.readValue(inputFile,Event.class);
-			List<Query>    list       = event.listQueries();
+			Locations      locs       = jsonMapper.readValue(inputFile,Locations.class);
+			List<Location> list       = locs.listLocations();
+			Collections.sort(list);
 			
-
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			// export results /////////////////////////////
-			bw.write("timestamp\tquery");
+			// export header ///////////////////////////////
+			bw.write("timestamp,longitudde,latitude,accuracy,velocity,heading,altitude,activities");
 			bw.newLine();
-			for(Query q:list) {
-				System.out.println(q);
-				for(TimeStamp time:q.listTimeStamp()) {
-					bw.write(sdf.format(time.getTime()) + "\t" + q.getQueryText());
-					bw.newLine();
-				}
+			for(Location loc:locs.listLocations()) { 
+				bw.write(loc.toCsvString());
+				bw.newLine();
 			}
 		}
 		catch(JsonMappingException|JsonParseException exp) {
@@ -51,6 +48,8 @@ public class QueryLogParser {
 		catch(IOException exp) { 
 			exp.printStackTrace();
 		}
+		long t1 = System.currentTimeMillis();
+		System.out.printf("time duration: %.03f (sec) ", (t1-t0)/1000d);
 	}
 	
 }
