@@ -3,8 +3,10 @@ Java Parser Library for Google Takeout data
 
 ## 0. summary
 - Google provides the *takeout* service to archive and download own data stored through Google services
-- Since takeout data is segmented and is provided in each service respectively, data formats are different and their specifications/definitions are not provided officially. 
-- This library provides simple java parser for some kinds of takeout data (e.g. Location, Query, Photo and fit)    
+- Since takeout data is segmented and is provided in each service respectively, data formats are different
+- Data specifications/definitions are not provided officially. so this package may not support all data contents  
+- This library provides simple java parser for some kinds of takeout data (e.g. Location, Query, and Photo)    
+- This package is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 ## 1. Location (JSON) 
 - location logs with estimated activities
@@ -195,9 +197,5 @@ Java Parser Library for Google Takeout data
   - *isMutable* : (boolean) mutable flag? 
   - *cachedSize* : (int) ?
 - *geoInfoExif* : (object) Geo information from EXIF. 
-  - __object contents are same as geoInfo__
+  - _object contents are same as geoInfo_
 
-
-
-## 4. Fit (xml)
-(TBA)
