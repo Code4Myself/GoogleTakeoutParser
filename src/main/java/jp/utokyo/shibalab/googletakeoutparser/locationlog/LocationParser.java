@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -74,12 +75,24 @@ public class LocationParser {
 	 * @throws IOException exception in parsing
 	 */
 	public void parseJson(File inputJsonFile) throws IOException {
+		// conduct JSON parsing ////////////////////////////
+		parseJson(inputJsonFile,null,null);
+	}
+	
+	/**
+	 * parse JSON object from the indicated JSON File
+	 * @param inputJsonFile JSON file of location history obtained from Google take out 
+	 * @param fromDate start time of time range. null allowable
+	 * @param toDate end time of time range. null allowable
+	 * @throws IOException exception in parsing
+	 */
+	public void parseJson(File inputJsonFile,Date fromDate,Date toDate) throws IOException {
 		// prepare JSON parser instance ////////////////////
 		JsonFactory jsonFactory = new JsonFactory();
 		JsonParser  jsonParser  = jsonFactory.createParser(inputJsonFile);
 
 		// conduct JSON parsing ////////////////////////////
-		parseLocations(jsonParser);
+		parseLocations(jsonParser,fromDate,toDate);
 	}
 	
 	/**
@@ -88,20 +101,34 @@ public class LocationParser {
 	 * @throws IOException exception in parsing
 	 */
 	public void parseJson(InputStream jsonStream) throws IOException {
+		// conduct JSON parsing ////////////////////////////
+		parseJson(jsonStream,null,null);
+	}
+	
+	/**
+	 * parse JSON object from the indicated JSON stream
+	 * @param jsonStream JSON input stream of location history obtained from Google take out 
+	 * @param fromDate start time of time range. null allowable
+	 * @param toDate end time of time range. null allowable
+	 * @throws IOException exception in parsing
+	 */
+	public void parseJson(InputStream jsonStream,Date fromDate,Date toDate) throws IOException {
 		// prepare JSON parser instance ////////////////////
 		JsonFactory jsonFactory = new JsonFactory();
 		JsonParser  jsonParser  = jsonFactory.createParser(jsonStream);
 
 		// conduct JSON parsing ////////////////////////////
-		parseLocations(jsonParser);
+		parseLocations(jsonParser,fromDate,toDate);
 	}
 	
 	/**
 	 * parse JSON object of location log data
 	 * @param jsonParser JSON parser instance starting at root. 
+	 * @param fromDate start time of time range. null allowable
+	 * @param toDate end time of time range. null allowable
 	 * @throws IOException exception in parsing
 	 */
-	private void parseLocations(JsonParser jsonParser) throws IOException {
+	private void parseLocations(JsonParser jsonParser,Date fromDate,Date toDate) throws IOException {
 		// root object 
 		if( jsonParser.nextToken() == JsonToken.START_OBJECT ) {
 			// loop until the end of root object
@@ -144,8 +171,16 @@ public class LocationParser {
 									activitys   = parseActivitys(jsonParser);  
 								}
 							}
+							// check if object is within time range
 							Location location = new Location(timestampMs,longitudeE7,latitudeE7,accuracy,velocity,heading,altitude,activitys);
-							doPostProcess(location);
+							if( fromDate == null && toDate == null );
+							else if( fromDate != null && toDate == null && timestampMs < fromDate.getTime() ) { location = null; }
+							else if( fromDate == null && toDate != null && toDate.getTime() < timestampMs ) {   location = null; }
+							else if( fromDate != null && toDate != null && (timestampMs < fromDate.getTime() || toDate.getTime() < timestampMs) ) { location = null; }
+							
+							if( location != null ) { 
+								doPostProcess(location);
+							}
 						}
 					}
 				}
