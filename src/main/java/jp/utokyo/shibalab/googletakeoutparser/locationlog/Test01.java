@@ -1,9 +1,10 @@
 package jp.utokyo.shibalab.googletakeoutparser.locationlog;
 
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,14 +24,14 @@ public class Test01 {
 	 * @param args 0:input JSON file, 1:output csv file
 	 */
 	public static void main(String[] args) {
-		File inputFile  = new File(args[0]);
-		File outputFile = new File(args[1]);
+		Path inputPath  = Paths.get(args[0]);
+		Path outputPath = Paths.get(args[1]); 
 		
 		long t0 = System.currentTimeMillis();
-		try (BufferedWriter bw=new BufferedWriter(new FileWriter(outputFile))) {
+		try (BufferedWriter bw=Files.newBufferedWriter(outputPath)) {
 			// parse JSON data ////////////////////////////
 			ObjectMapper   jsonMapper = new ObjectMapper();
-			Locations      locs       = jsonMapper.readValue(inputFile,Locations.class);
+			Locations      locs       = jsonMapper.readValue(inputPath.toFile(),Locations.class);
 			List<Location> list       = locs.listLocations();
 			Collections.sort(list);
 			

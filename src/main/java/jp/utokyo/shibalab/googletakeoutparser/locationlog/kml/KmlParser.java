@@ -1,7 +1,7 @@
 package jp.utokyo.shibalab.googletakeoutparser.locationlog.kml;
 
 /**
- * 
+ * @deprecated unused
  */
 public class KmlParser {
 
