@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Query object class
+ * @deprecated
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Query {

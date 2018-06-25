@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * convert JSON data of Google query logs into CSV (batch)
+ * @deprecated
  */
 public class Test01 {
 	/* ==============================================================

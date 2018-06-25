@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 /**
  * convert JSON data of Google query logs into CSV (stream input) 
+ * @deprecated
  */
 public class Test02 {
 	/* ==============================================================

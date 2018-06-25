@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Event class 
+ * @deprecated
  */
 public class Events {
 	/* ==============================================================

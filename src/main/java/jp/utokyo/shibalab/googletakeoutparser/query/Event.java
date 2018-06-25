@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 
+ * Event class
+ * @deprecated
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {

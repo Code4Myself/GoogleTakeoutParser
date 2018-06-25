@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonToken;
 
 /**
  * JSON Parser class for query history of Google take out. 
+ * @deprecated
  */
 public class QueryParser {
 	/* ==============================================================
