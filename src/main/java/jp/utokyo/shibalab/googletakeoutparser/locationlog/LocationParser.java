@@ -32,6 +32,8 @@ public class LocationParser {
 	public static final String KEY_HEADING    = "heading";
 	/** JSON key: altitude */
 	public static final String KEY_ALTITUDE   = "altitude";
+	/** JSON key: verticalAccuracy */
+	public static final String KEY_VERTICAL_ACCURACY = "verticalAccuracy";
 	/** JSON key: activity */
 	public static final String KEY_ACTIVITY   = "activity";
 	/** JSON key: activitys 
@@ -139,40 +141,43 @@ public class LocationParser {
 					while( jsonParser.nextToken() != JsonToken.END_ARRAY ) {
 						// parse individual location object 
 						if( jsonParser.getCurrentToken() == JsonToken.START_OBJECT ) {
-							Long            timestampMs = null;
-							Integer         longitudeE7 = null;
-							Integer         latitudeE7  = null;
-							Integer         accuracy    = null;
-							Integer         velocity    = null;
-							Integer         heading     = null;
-							Integer         altitude    = null;
-							List<Activitys> activitys   = null;
+							Long            timestampMs      = null;
+							Integer         longitudeE7      = null;
+							Integer         latitudeE7       = null;
+							Integer         accuracy         = null;
+							Integer         velocity         = null;
+							Integer         heading          = null;
+							Integer         altitude         = null;
+							Integer         verticalAccuracy = null;
+							List<Activitys> activitys        = null;
 							while( jsonParser.nextToken() != JsonToken.END_OBJECT ) {
 								// get JSON key ++++++++++++++++++++++++
 								String locationKey = jsonParser.getCurrentName();
 								// move to JSON value ++++++++++++++++++
 								jsonParser.nextToken(); 
 								// case "timestampMs"
-								if( locationKey.equals(KEY_TIMESTAMP) ) {      timestampMs = jsonParser.getValueAsLong(); }
+								if( locationKey.equals(KEY_TIMESTAMP) ) {              timestampMs = jsonParser.getValueAsLong(); }
 								// case "latitudeE7"
-								else if ( locationKey.equals(KEY_LATITUDE) ) { latitudeE7  = jsonParser.getValueAsInt();  }
+								else if ( locationKey.equals(KEY_LATITUDE) ) {         latitudeE7  = jsonParser.getValueAsInt();  }
 								// case "longitudeE7"
-								else if( locationKey.equals(KEY_LONGITUDE) ) { longitudeE7 = jsonParser.getValueAsInt();  }
+								else if( locationKey.equals(KEY_LONGITUDE) ) {         longitudeE7 = jsonParser.getValueAsInt();  }
 								// case "accuracy"
-								else if( locationKey.equals(KEY_ACCURACY) ) {  accuracy    = jsonParser.getValueAsInt();  }
+								else if( locationKey.equals(KEY_ACCURACY) ) {          accuracy    = jsonParser.getValueAsInt();  }
 								// case "velocity"
-								else if( locationKey.equals(KEY_VELOCITY) ) {  velocity    = jsonParser.getValueAsInt();  }
+								else if( locationKey.equals(KEY_VELOCITY) ) {          velocity    = jsonParser.getValueAsInt();  }
 								// case "heading"
-								else if( locationKey.equals(KEY_HEADING) )  {  heading     = jsonParser.getValueAsInt();  }
+								else if( locationKey.equals(KEY_HEADING) )  {          heading     = jsonParser.getValueAsInt();  }
 								// case "altitude"
-								else if( locationKey.equals(KEY_ALTITUDE) ) {  altitude    = jsonParser.getValueAsInt();  }
+								else if( locationKey.equals(KEY_ALTITUDE) ) {          altitude    = jsonParser.getValueAsInt();  }
+								// case "verticalAccuracy"
+								else if( locationKey.equals(KEY_VERTICAL_ACCURACY) ) { verticalAccuracy = jsonParser.getValueAsInt(); }
 								// case "activitys" or "activity"
 								else if( locationKey.equals(KEY_ACTIVITYS) || locationKey.equals(KEY_ACTIVITY) ) { 
 									activitys   = parseActivitys(jsonParser);  
 								}
 							}
 							// check if object is within time range
-							Location location = new Location(timestampMs,longitudeE7,latitudeE7,accuracy,velocity,heading,altitude,activitys);
+							Location location = new Location(timestampMs,longitudeE7,latitudeE7,accuracy,velocity,heading,altitude,verticalAccuracy,activitys);
 							if( fromDate == null && toDate == null );
 							else if( fromDate != null && toDate == null && timestampMs < fromDate.getTime() ) { location = null; }
 							else if( fromDate == null && toDate != null && toDate.getTime() < timestampMs ) {   location = null; }

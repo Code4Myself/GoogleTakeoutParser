@@ -36,7 +36,7 @@ public class Test01 {
 			Collections.sort(list);
 			
 			// export header ///////////////////////////////
-			bw.write("timestamp,longitudde,latitude,accuracy,velocity,heading,altitude,activities");
+			bw.write(Location.getCsvHeader());
 			bw.newLine();
 			for(Location loc:locs.listLocations()) { 
 				bw.write(loc.toCsvString());
