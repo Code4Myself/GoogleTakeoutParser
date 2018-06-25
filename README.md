@@ -76,14 +76,16 @@ Java Parser Library for Google Takeout data
 - *velocity* : (integer) velocity value (m/s or km/h?). sometimes missing
 - *heading* : (integer) heading direction ? (0 - 360 deg?)
 - *altitude* : (integer) altitude value (m?). sometimes missing
+- *verticalAccuracy* : (integer) vertical accuracy ? 
 - *activity* : (array/object) estimated activity or transportation mode. (JSON key was updated from activitys to activity)
   - *timestampMs* : (string) timestamp in msec. 
   - *activity* : (array/object) activity contents (JSON key was updated from activities to activity)
     - *type* : (string) activity type. (e.g. still, onFoot, walking, running, inVehicle, onBicycle, unknown, ...) 
     - *confidence* : (integer) confidence value of estimation ?   
 
-## 2. Query (JSON)
-- query logs on Google search engine. 
+## 2. Query (JSON)  *UNSUPPORTED*
+- query logs on Google search engine.
+- *takeout data excluded JSON format.*    
 
 ```json:
 {

@@ -27,11 +27,11 @@ public class Test02 {
 		long t0 = System.currentTimeMillis();
 		try (BufferedWriter bw=Files.newBufferedWriter(outputPath)) {
 			// export header ///////////////////////////////
-			bw.write("timestamp,longitudde,latitude,accuracy,velocity,heading,altitude,activities");
+			bw.write(Location.getCsvHeader());
 			bw.newLine();
 
 			// parse JSON data ////////////////////////////
-			LocationParser parser = new LocationParser() {
+			new LocationParser() {
 				public void doPostProcess(Location location) { 
 					try {
 						bw.write(location.toCsvString());
@@ -41,8 +41,8 @@ public class Test02 {
 						exp.printStackTrace();
 					}
 				}
-			};
-			parser.parseJson(inputPath.toFile());
+			}
+			.parseJson(inputPath.toFile());
 		}
 		catch(JsonMappingException|JsonParseException exp) {
 			exp.printStackTrace();

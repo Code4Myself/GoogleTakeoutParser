@@ -34,7 +34,7 @@ public class Test03 {
 		long t0 = System.currentTimeMillis();
 		try (BufferedWriter bw=Files.newBufferedWriter(outputPath)) {
 			// export header ///////////////////////////////
-			bw.write("timestamp,longitudde,latitude,accuracy,velocity,heading,altitude,activities");
+			bw.write(Location.getCsvHeader());
 			bw.newLine();
 
 			// parse JSON data ////////////////////////////

@@ -15,6 +15,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Location implements Comparable<Location> {
 	/* ==============================================================
+	 * static methods
+	 * ============================================================== */
+	/**
+	 * get CSV header line with comma delimiter
+	 * @return header line
+	 */
+	public static String getCsvHeader() {
+		return getCsvHeader(",");
+	}
+	
+	/**
+	 * get CSV header line with the indicated delimiter
+	 * @param delim delimiter
+	 * @return header line
+	 */
+	public static String getCsvHeader(String delim) {
+		return StringUtils.join(
+				new String[]{"timestamp","longitude","latitude","accuracy","velocity","heading","altitude","verticalAccuracy","activity"},
+				delim);
+	}
+	
+	
+	/* ==============================================================
 	 * instance fields
 	 * ============================================================== */
 	/** time-stamp */
@@ -44,6 +67,10 @@ public class Location implements Comparable<Location> {
 	/** altitude */
 	@JsonProperty("altitude")
 	private Integer _altitude;
+
+	/** vertical accuracy */
+	@JsonProperty("verticalAccuracy")
+	private Integer _verticalAccuracy;
 	
 	/** activity array */
 //	@JsonProperty("activitys")
@@ -58,14 +85,15 @@ public class Location implements Comparable<Location> {
 	 * initialization
 	 */
 	protected Location() {
-		_timestampMs = null;
-		_latitudeE7  = null;
-		_longitudeE7 = null;
-		_accuracy    = null;
-		_velocity    = null;
-		_heading     = null;
-		_altitude    = null;
-		_activities  = null;
+		_timestampMs      = null;
+		_latitudeE7       = null;
+		_longitudeE7      = null;
+		_accuracy         = null;
+		_velocity         = null;
+		_heading          = null;
+		_altitude         = null;
+		_verticalAccuracy = null;	// added@2018.06.25
+		_activities       = null;
 	}
 	
 	/**
@@ -77,17 +105,23 @@ public class Location implements Comparable<Location> {
 	 * @param velocity velocity
 	 * @param heading  heading
 	 * @param altitude altitude
+	 * @param verticalAccuracy vertical accuracy
 	 * @param activitys activities
 	 */
-	protected Location(Long timestampMs,Integer longitudeE7,Integer latitudeE7,Integer accuracy,Integer velocity,Integer heading,Integer altitude,List<Activitys> activities) {
-		_timestampMs = timestampMs;
-		_latitudeE7  = latitudeE7;
-		_longitudeE7 = longitudeE7;
-		_accuracy    = accuracy;
-		_velocity    = velocity;
-		_heading     = heading;
-		_altitude    = altitude;
-		_activities  = activities;
+	protected Location(	Long timestampMs,Integer longitudeE7,Integer latitudeE7,Integer accuracy,Integer velocity,
+						Integer heading, Integer altitude,
+						Integer verticalAccuracy,	 // added@2018.06.25
+						List<Activitys> activities) 
+	{
+		_timestampMs      = timestampMs;
+		_latitudeE7       = latitudeE7;
+		_longitudeE7      = longitudeE7;
+		_accuracy         = accuracy;
+		_velocity         = velocity;
+		_heading          = heading;
+		_altitude         = altitude;
+		_verticalAccuracy = verticalAccuracy;	// added@2018.06.25
+		_activities       = activities;
 	}
 	
 
@@ -151,6 +185,14 @@ public class Location implements Comparable<Location> {
 	}
 	
 	/**
+	 * get vertical accuracy 
+	 * @return vertical accuracy
+	 */
+	public Integer getVerticalAccuracy() {
+		return _verticalAccuracy;
+	}
+	
+	/**
 	 * get activity count
 	 * @return activity count. return null if no value
 	 */
@@ -177,7 +219,7 @@ public class Location implements Comparable<Location> {
 	}
 	
 	/**
-	 * make CSV string as the following column order(timestamp,longitude,latitude,accuracy,velocity,heading,altitude,activity)
+	 * make CSV string as the following column order(timestamp,longitude,latitude,accuracy,velocity,heading,altitude,verticalAccuracy,activity)
 	 * @return CSV string
 	 */
 	public String toCsvString() {
@@ -185,7 +227,7 @@ public class Location implements Comparable<Location> {
 	}
 	
 	/**
-	 * make CSV string as the following column order(timestamp,longitude,latitude,accuracy,velocity,heading,altitude,activity)
+	 * make CSV string as the following column order(timestamp,longitude,latitude,accuracy,velocity,heading,altitude,verticalAccuracy,activity)
 	 * @param delim column delimiter
 	 * @return CSV string
 	 */
@@ -200,7 +242,8 @@ public class Location implements Comparable<Location> {
 										String.valueOf(_accuracy),
 										String.valueOf(_velocity),
 										String.valueOf(_heading),
-										String.valueOf(_altitude)};
+										String.valueOf(_altitude),
+										String.valueOf(_verticalAccuracy)};
 		// compose CSV line 
 		String core = StringUtils.join(tokens,delim);
 		
@@ -230,13 +273,14 @@ public class Location implements Comparable<Location> {
 	/* @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
-		return String.format("ts=%d,lon=%d,lat=%d,accuracy=%d,velocity=%d,altitude=%d,activitys=%s)",
+		return String.format("ts=%d,lon=%d,lat=%d,accuracy=%d,velocity=%d,altitude=%d,verticalAccuracy=%d,activitys=%s)",
 							 _timestampMs,
 							 _longitudeE7,
 							 _latitudeE7,
 							 _accuracy,
 							 _velocity,
 							 _altitude,
+							 _verticalAccuracy,
 							 _activities);
 	}	
 }
