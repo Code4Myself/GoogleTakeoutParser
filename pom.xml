@@ -12,11 +12,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<commons.lang.version>3.5</commons.lang.version>
-		<apache.logging.version>2.3</apache.logging.version>
+		<!-- <apache.logging.version>2.3</apache.logging.version>
 		<jackson.version>2.8.6</jackson.version>
 		<ical4j.version>2.0.0</ical4j.version>
 		<dom4j.version>2.0.1</dom4j.version>
-		<jdom.version>2.0.6</jdom.version>
+		<jdom.version>2.0.6</jdom.version> -->
+		<tika.version>1.18</tika.version>
 	</properties>
 
 
@@ -30,6 +31,18 @@
 			<version>${commons.lang.version}</version>
 		</dependency>
 
+		<!-- apache tika =================================== -->
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-core</artifactId>
+			<version>${tika.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-parsers</artifactId>
+			<version>${tika.version}</version>
+		</dependency>
+  
 		<!-- apache logging ================================ 
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -39,24 +52,27 @@
 		-->
 
 		<!-- Jackson parser ================================ -->
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		-->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		-->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		-->
 
 		<!-- ical4j ======================================== -->
 		<!-- https://mvnrepository.com/artifact/org.mnode.ical4j/ical4j -->
