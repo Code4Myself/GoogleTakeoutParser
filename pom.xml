@@ -16,8 +16,8 @@
 		<!-- <apache.logging.version>2.3</apache.logging.version>
 		<ical4j.version>2.0.0</ical4j.version>
 		<dom4j.version>2.0.1</dom4j.version>
-		<jdom.version>2.0.6</jdom.version> -->
-		<tika.version>1.21</tika.version>
+		<jdom.version>2.0.6</jdom.version>
+		<tika.version>1.22</tika.version> -->
 	</properties>
 
 
@@ -31,7 +31,7 @@
 			<version>${commons.lang.version}</version>
 		</dependency>
 
-		<!-- apache tika =================================== -->
+		<!-- apache tika ===================================
 		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-core</artifactId>
@@ -42,7 +42,7 @@
 			<artifactId>tika-parsers</artifactId>
 			<version>${tika.version}</version>
 		</dependency>
-		
+		-->
   		
 		<!-- apache logging ================================ 
 		<dependency>
