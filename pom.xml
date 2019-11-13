@@ -12,7 +12,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<commons.lang.version>3.5</commons.lang.version>
-		<jackson.version>2.9.9</jackson.version>
+		<jackson.version>2.10.1</jackson.version>
 		<!-- <apache.logging.version>2.3</apache.logging.version>
 		<ical4j.version>2.0.0</ical4j.version>
 		<dom4j.version>2.0.1</dom4j.version>
