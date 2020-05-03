@@ -98,7 +98,7 @@
 ## 4.1. データ概要
 |key1|key2|key3|key4|key5|説明|
 |:---:|:---:|:---:|:---:|:---:|:---|
-|timelineObjects(array)||||ルートノード。以下はTimelineオブジェクトの配列|
+|timelineObjects(array)|||||ルートノード。以下はTimelineオブジェクトの配列|
 ||activitySegment(object)||||移動区間を表してそう|
 |||startLocation(object)|||出発点|
 ||||latitudeE7(long)||緯度。10^7 倍|
