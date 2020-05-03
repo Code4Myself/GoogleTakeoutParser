@@ -27,7 +27,6 @@ public class Locations {
 		return _locations;
 	}
 	
-	/* @see java.lang.Object#toString() */
 	@Override
 	public String toString() { 
 		return _locations.toString();

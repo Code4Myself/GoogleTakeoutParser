@@ -52,6 +52,7 @@ public class Activity {
 	public String getType() { 
 		return _type;
 	}
+	
 	/**
 	 * get confidence value
 	 * @return confidence value(%?)

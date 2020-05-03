@@ -261,7 +261,6 @@ public class Location implements Comparable<Location> {
 		return core + "," + sub;
 	}
 	
-	/* @see java.lang.Comparable#compareTo(java.lang.Object) */
 	@Override
 	public int compareTo(Location loc) { 
 		Long L0 = new Long(_timestampMs);
@@ -270,7 +269,6 @@ public class Location implements Comparable<Location> {
 		return L0.compareTo(L1);
 	}
 	
-	/* @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		return String.format("ts=%d,lon=%d,lat=%d,accuracy=%d,velocity=%d,altitude=%d,verticalAccuracy=%d,activitys=%s)",

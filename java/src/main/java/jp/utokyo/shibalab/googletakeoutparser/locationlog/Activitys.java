@@ -22,7 +22,6 @@ public class Activitys {
 	private Long _timestampMs;
 	
 	/** for activity array */
-//	@JsonProperty("activities")
 	@JsonProperty("activity")
 	private List<Activity> _activities;
 
@@ -68,7 +67,6 @@ public class Activitys {
 		return _activities;
 	}
 	
-	/* @see java.lang.Object#toString() */
 	@Override
 	public String toString() {
 		// date time format /////////////////////
