@@ -19,11 +19,23 @@ Java Parser Library for Google Takeout data
 ### 1.1. run conversion from json to csv 
 -
 ```bash
+#
+# usage: Option Tips
+# -e,--end-date <arg>     (Optional) end date (yyyyMMdd). convert to the
+#                         end if not specified
+# -h,--help               view command line help
+# -i,--in-file <arg>      input file: location_history.json
+# -o,--out-file <arg>     output file: location_history.csv
+# -s,--start-date <arg>   (Optional) start date (yyyyMMdd). convert from
+#                         the beginning if not specified
+#
 java -Xmx2G -classpath .:lib/GoogleTakeoutParser-0.0.2.20220122-jar-with-dependencies.jar \
   jp.utokyo.shibalab.googletakeoutparser.locationlog.Main \
   --in-file LOCATION_HISTORY.JSON \
   --out-file output.csv
 ```
+
+
 
 ### 1.2. Location_History.json sample
 ```json: locatoin.json

@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -260,7 +259,7 @@ public class Location implements Comparable<Location> {
 		}		
 		
 		// returns result /////////////////////////////////
-		return core + "," + sub;
+		return core + delim + sub;
 	}
 	
 	@Override
