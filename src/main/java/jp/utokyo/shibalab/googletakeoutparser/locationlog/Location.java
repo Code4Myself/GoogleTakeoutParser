@@ -4,11 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 /**
  * class for location object
  */
@@ -106,7 +108,7 @@ public class Location implements Comparable<Location> {
 	 * @param heading  heading
 	 * @param altitude altitude
 	 * @param verticalAccuracy vertical accuracy
-	 * @param activitys activities
+	 * @param activities activities
 	 */
 	protected Location(	Long timestampMs,Integer longitudeE7,Integer latitudeE7,Integer accuracy,Integer velocity,
 						Integer heading, Integer altitude,
@@ -239,11 +241,11 @@ public class Location implements Comparable<Location> {
 		String[] tokens = new String[]{ sdf.format(getTime()),
 										String.format("%.08f",getLon()),
 										String.format("%.08f",getLat()),
-										String.valueOf(_accuracy),
-										String.valueOf(_velocity),
-										String.valueOf(_heading),
-										String.valueOf(_altitude),
-										String.valueOf(_verticalAccuracy)};
+										_accuracy != null ? String.valueOf(_accuracy) : EMPTY,
+										_velocity != null ? String.valueOf(_velocity) : EMPTY,
+										_heading != null ?  String.valueOf(_heading)  : EMPTY,
+										_altitude != null ? String.valueOf(_altitude) : EMPTY,
+										_verticalAccuracy != null ? String.valueOf(_verticalAccuracy) : EMPTY};
 		// compose CSV line 
 		String core = StringUtils.join(tokens,delim);
 		
